@@ -6,6 +6,7 @@
 
 #include "eps_src/Generic_eps.hpp"
 #include "FpConfig.hpp"
+#include <Fw/Log/LogString.hpp>
   
 #include "nos_link.h"
 
@@ -62,7 +63,8 @@ namespace Components {
 
     HkTelemetryPkt.CommandCount++;
 
-    this->log_ACTIVITY_HI_TELEM("NOOP command success\n");
+    Fw::LogStringArg log_msg("NOOP command success\n");
+    this->log_ACTIVITY_HI_TELEM(log_msg);
     this->tlmWrite_CommandCount(HkTelemetryPkt.CommandCount);
     this->cmdResponse_out(opCode, cmdSeq, Fw::CmdResponse::OK);
   }
@@ -74,7 +76,8 @@ namespace Components {
     HkTelemetryPkt.DeviceCount = 0;
     HkTelemetryPkt.DeviceErrorCount = 0;
 
-    this->log_ACTIVITY_HI_TELEM("Reset Counters command success\n");
+    Fw::LogStringArg log_msg("Reset Counters command success\n");
+    this->log_ACTIVITY_HI_TELEM(log_msg);
 
     Update_Counters();
     this->cmdResponse_out(opCode, cmdSeq, Fw::CmdResponse::OK);
@@ -102,18 +105,21 @@ namespace Components {
       if(status == OS_SUCCESS)
       {
         HkTelemetryPkt.DeviceCount++;
-        this->log_ACTIVITY_HI_TELEM("Switch command success\n");
+        Fw::LogStringArg log_msg("Switch command success\n");
+        this->log_ACTIVITY_HI_TELEM(log_msg);
       }
       else
       {
-        this->log_ACTIVITY_HI_TELEM("Switch command failed\n");
+        Fw::LogStringArg log_msg("Switch command failed\n");
+        this->log_ACTIVITY_HI_TELEM(log_msg);
         HkTelemetryPkt.DeviceErrorCount++;
       }
     }
     else
     {
       HkTelemetryPkt.CommandErrorCount++;
-      this->log_ACTIVITY_HI_TELEM("Switch command failed\n");
+      Fw::LogStringArg log_msg("Switch command failed\n");
+      this->log_ACTIVITY_HI_TELEM(log_msg);
     }
 
     Update_Counters();
@@ -130,13 +136,15 @@ namespace Components {
     status = GENERIC_EPS_RequestHK(&Generic_epsI2c, &Generic_epsHK);
     if (status == OS_SUCCESS)
     {
-        this->log_ACTIVITY_HI_TELEM("RequestHK command success\n");
+        Fw::LogStringArg log_msg("RequestHK command success\n");  
+        this->log_ACTIVITY_HI_TELEM(log_msg);
         HkTelemetryPkt.CommandCount++;
         HkTelemetryPkt.DeviceCount++;
     }
     else
     {
-        this->log_ACTIVITY_HI_TELEM("RequestHK command failed!\n");
+        Fw::LogStringArg log_msg("RequestHK command failed!\n");
+        this->log_ACTIVITY_HI_TELEM(log_msg);
         HkTelemetryPkt.CommandErrorCount++;
         HkTelemetryPkt.DeviceErrorCount++;
     }
