@@ -4,12 +4,15 @@ import glob
 for p in glob.glob('/gems/gems/openc3-cosmos-nos3-*/targets/GENERIC_EPS/scripts'):
     if p not in sys.path:
         sys.path.append(p)
+
+from openc3.script import cmd, tlm, check
+from openc3.script.suite import Suite, Group
+
 try:
-    from openc3.script import cmd, tlm, check
-    from generic_eps_lib import safe_eps
-    from generic_eps_app_test import run_generic_eps_app_test
-    from generic_eps_device_test import run_generic_eps_device_test
-    from generic_eps_ast_test import run_generic_eps_ast_test
+    from nos3.generic_eps_lib import safe_eps
+    from nos3.generic_eps_app_test import run_generic_eps_app_test
+    from nos3.generic_eps_device_test import run_generic_eps_device_test
+    from nos3.generic_eps_ast_test import run_generic_eps_ast_test
 except ImportError:
     pass
 
@@ -40,7 +43,7 @@ class Generic_eps_Test(Suite):
     def __init__(self):
         super().__init__()
         self.add_group(GENERIC_EPS_Functional_Test)
-        self.add_group('GENERIC_EPS_Automated_Scenario_Test')
+        self.add_group(GENERIC_EPS_Automated_Scenario_Test)
 
     def setup(self):
         safe_eps()
