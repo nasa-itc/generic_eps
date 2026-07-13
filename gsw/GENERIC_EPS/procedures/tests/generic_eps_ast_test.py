@@ -1,14 +1,18 @@
 from openc3.script import tlm, wait_check
 import time
-from generic_eps_lib import (
-    eps_prepare_ast, 
-    eps_sim_disable, 
-    eps_sim_enable, 
-    confirm_eps_data_loop,
-    get_eps_hk,
-    GENERIC_EPS_TEST_LOOP_COUNT,
-    GENERIC_EPS_RESPONSE_TIMEOUT
-)
+
+try:
+    from nos3.generic_eps_lib import (
+        eps_prepare_ast, 
+        eps_sim_disable, 
+        eps_sim_enable, 
+        confirm_eps_data_loop,
+        get_eps_hk,
+        GENERIC_EPS_TEST_LOOP_COUNT,
+        GENERIC_EPS_RESPONSE_TIMEOUT
+    )
+except ImportError:
+    pass
 
 def run_generic_eps_ast_test():
     ##

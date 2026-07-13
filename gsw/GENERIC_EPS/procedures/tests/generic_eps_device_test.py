@@ -1,9 +1,12 @@
-from generic_eps_lib import (
-    safe_eps,
-    get_eps_hk,
-    confirm_eps_data_loop,
-    GENERIC_EPS_TEST_LOOP_COUNT
-)
+try:
+    from nos3.generic_eps_lib import (
+        safe_eps,
+        get_eps_hk,
+        confirm_eps_data_loop,
+        GENERIC_EPS_TEST_LOOP_COUNT
+    )
+except ImportError:
+    pass
 
 def run_generic_eps_device_test():
     ##

@@ -1,7 +1,12 @@
 from openc3.script import cmd, tlm, check
-from generic_eps_lib import safe_eps, get_eps_hk, eps_cmd, GENERIC_EPS_TEST_LOOP_COUNT
+
+try:
+    from nos3.generic_eps_lib import safe_eps, get_eps_hk, eps_cmd, GENERIC_EPS_TEST_LOOP_COUNT
+except ImportError:
+    pass
 
 def run_generic_eps_app_test():
+
     ##
     ## This script tests the standard cFS component application functionality.
     ## Currently this includes: 
